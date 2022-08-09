@@ -1,0 +1,26 @@
+﻿@using permissions.View_Model
+@model List<UsersRolesViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>User</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.userName</td>
+            <td>@item.email</td>
+            <td>@String.Join(", ", item.roles.ToList())</td>
+            <td>
+                <a class="btn btn-success" asp-action="manageRoles" asp-route-userId="@item.id">Manage Roles</a>
+            </td>
+        </tr>       
+    }
+</table>

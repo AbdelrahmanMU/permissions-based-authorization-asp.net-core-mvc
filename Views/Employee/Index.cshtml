@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@using permissions.Constant
+
+
+@if(AuthorizationService.AuthorizeAsync(User, Permissions.AddEmployee.View).Result.Succeeded)
+{
+<div class="d-flex">
+    <div class="card text-center" style="width:400px; margin: auto">
+        <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/912/912214.png" alt="Card image" style="width:100%">
+        <div class="card-body">
+            <h4 class="card-title text-decoration-none"><a style="cursor: pointer">Abdelrahman</a></h4>
+            <p class="card-text">sadat city</p>
+            @if(AuthorizationService.AuthorizeAsync(User, Permissions.AddEmployee.Create).Result.Succeeded)
+                {
+                    <a href="#" class="btn btn-primary">Add</a>
+                }
+            @if (AuthorizationService.AuthorizeAsync(User, Permissions.AddEmployee.Update).Result.Succeeded)
+                {
+                    <a href="#" class="btn btn-success">Edit</a>
+                }
+            @if (AuthorizationService.AuthorizeAsync(User, Permissions.AddEmployee.Delete).Result.Succeeded)
+                {
+                    <a href="#" class="btn btn-danger">Delete</a>
+                }
+        </div>
+    </div>
+</div>    
+}
+
